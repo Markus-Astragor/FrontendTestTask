@@ -46,17 +46,23 @@ export default function Register() {
       <form className="login" onSubmit={submit}>
         <h2 className="login-title">Register</h2>
 
-        <Input placeholder="Enter your name..." callback={setUdername} />
+        <Input
+          placeholder="Enter your name..."
+          callback={setUdername}
+          value={username}
+        />
         <Input
           placeholder="Enter your password..."
           type="password"
           callback={setPassword}
+          value={password}
         />
         <Input
           placeholder="Repeat your password..."
           type="password"
           callback={setRepeatPassword}
           error={error}
+          value={repeatPassword}
         />
         {isLoading ? (
           "Loading"

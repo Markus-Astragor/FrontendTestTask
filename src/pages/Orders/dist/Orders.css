@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+.orders-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-flow: row nowrap;
+}
+.orders {
+  width: 70%;
+  height: 80%;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  overflow-y: scroll;
+}
+.all-orders {
+  width: 80%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  column-gap: 2vw;
+}
+.all-orders span {
+  display: block;
+}
+.order {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+.delete-btn,
+.edit-btn {
+  align-self: center;
+}
+.control-panel {
+  text-align: center;
+  grid-column: 5/-1;
+}
+.any-orders-text {
+  text-align: center;
+  grid-column: 1/-1;
+}

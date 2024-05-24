@@ -46,8 +46,13 @@ export default function Login() {
       <form className="login" onSubmit={submit}>
         <h2 className="login-title">Login</h2>
 
-        <Input placeholder="Enter your name..." callback={setUdername} />
         <Input
+          placeholder="Enter your name..."
+          callback={setUdername}
+          value={username}
+        />
+        <Input
+          value={password}
           placeholder="Enter your password"
           type="password"
           callback={setPassword}

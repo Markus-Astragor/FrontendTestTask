@@ -8,10 +8,12 @@ export default function Input({
   classNameContainer = "login-input-container",
   callback = () => console.log("test"),
   error = "",
+  value = "",
 }) {
   return (
     <div className={classNameContainer}>
       <input
+        value={value}
         onChange={(e) => callback(e.target.value)}
         placeholder={placeholder}
         type={type}
