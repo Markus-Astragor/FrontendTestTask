@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+
+calculateX(w)
+    return w / 1440 * 100
+
+calculateY(h)
+    return h / 1024 * 100
+
+sizer(w,h)
+    width w
+    height h
+
+sizervh(w,h)
+    width calculateX(w)vw
+    height calculateY(h)vh
+
+paddinger(t, r, b, l)
+    padding-top calculateY(t)vh 
+    padding-right calculateX(r)vw 
+    padding-bottom calculateY(b)vh 
+    padding-left calculateX(l)vw
+    box-sizing: border-box
+
+marginer(t, r, b, l)
+    margin-top calculateY(t)vh 
+    margin-right calculateX(r)vw
+    margin-bottom calculateY(b)vh
+    margin-left calculateX(l)vw
+
+flexer(jc,ai,fw)
+    display flex
+    justify-content: jc
+    align-items: ai
+    align-content: ai
+    flex-flow: fw
+
+fonter(fw,fs,lh)
+   font-family: "Inter", sans-serif;
+   font-optical-sizing: auto;
+   font-style: normal;
+   font-weight: fw;
+   font-size: fs;
+   line-height: lh;
+
+anone()
+   background: transparent
+   border: none
+   text-decoration: none
+   outline: none
+   color black
+
+c = center
+rw = row wrap
+cw = column wrap
+cn = column nowrap
+s = flex-start
+e = flex-end
+rn = row nowrap
+sb = space-between
+sa = space-around
+
+
