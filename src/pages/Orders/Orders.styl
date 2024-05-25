@@ -2,21 +2,48 @@
 
 .orders-container
   sizer(100%, 100vh)
-  flexer(c, c, rn)
+  flexer(c, c, cn)
+  row-gap: 3.25vh
+  word-wrap: break-word
+  word-break: break-all
+  button
+    white-space: nowrap
+
+.orders-header
+  sizer(90%, auto)
+  display: flex
+  justify-content: space-between
+
+.orders-header-title
+  fonter(600, 1.5rem, 1.2)
+
+.orders-log-out
+  fonter(700, 1.125rem, 1.5)
+  display: flex
+  justify-content: center
+  align-items: center
+  column-gap: 1vw
+
+.log-out-icon-container
+  cursor pointer
 
 .orders
-  sizer(70%, 80%)
+  sizer(80%, 80%)
   display: flex
   align-items: start
   justify-content: center
   overflow-y: scroll
+  scrollbar-width: none
 
 .all-orders
+  fonter(600, 1rem, 1.5)
   width 80%
   display: grid
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr
+  grid-template-columns: 0.5fr 1fr 0.5fr 0.5fr 0.5fr 0.7fr
   grid-template-rows: 1fr 1fr
   column-gap: 2vw
+  row-gap: 3vh
+  align-items: center
   span 
     display: block
 
@@ -29,10 +56,22 @@
 .delete-btn, .edit-btn
   align-self: center
 
+.add-btn
+  display: flex
+  justify-content: center
+  align-items: center
+  column-gap: 0.25vw
+  &:hover
+    paddinger(16px, 32px, 16px, 32px)
+
 .control-panel
   text-align: center
   grid-column: 5/-1 
 
 .any-orders-text
+  fonter(500, 1.125rem, 1.5)
   text-align: center
   grid-column: 1/-1
+
+.el-title
+  fonter(600, 1rem, 1.5)

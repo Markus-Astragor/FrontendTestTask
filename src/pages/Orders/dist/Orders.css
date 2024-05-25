@@ -6,22 +6,66 @@
   justify-content: center;
   align-items: center;
   align-content: center;
-  flex-flow: row nowrap;
+  flex-flow: column nowrap;
+  row-gap: 3.25vh;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+.orders-container button {
+  white-space: nowrap;
+}
+.orders-header {
+  width: 90%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+}
+.orders-header-title {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+.orders-log-out {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 1vw;
+}
+.log-out-icon-container {
+  cursor: pointer;
 }
 .orders {
-  width: 70%;
+  width: 80%;
   height: 80%;
   display: flex;
   align-items: start;
   justify-content: center;
   overflow-y: scroll;
+  scrollbar-width: none;
 }
 .all-orders {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.5;
   width: 80%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 0.5fr 1fr 0.5fr 0.5fr 0.5fr 0.7fr;
   grid-template-rows: 1fr 1fr;
   column-gap: 2vw;
+  row-gap: 3vh;
+  align-items: center;
 }
 .all-orders span {
   display: block;
@@ -35,11 +79,38 @@
 .edit-btn {
   align-self: center;
 }
+.add-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 0.25vw;
+}
+.add-btn:hover {
+  padding-top: 1.5625vh;
+  padding-right: 2.222222222222222vw;
+  padding-bottom: 1.5625vh;
+  padding-left: 2.222222222222222vw;
+  box-sizing: border-box;
+}
 .control-panel {
   text-align: center;
   grid-column: 5/-1;
 }
 .any-orders-text {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.125rem;
+  line-height: 1.5;
   text-align: center;
   grid-column: 1/-1;
+}
+.el-title {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.5;
 }

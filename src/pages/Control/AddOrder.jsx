@@ -5,6 +5,7 @@ import Icon from "../../components/svg-icon/Icon";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/api";
+import validate from "../../utils/validate";
 
 const addOrder = async (order) => {
   const { data } = await api.post("/createOrder", order);
@@ -18,6 +19,7 @@ export default function AddOrder() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState(1);
+  const [error, setError] = useState("");
 
   const nav = useNavigate();
   const token = Cookies.get("token");
@@ -27,6 +29,7 @@ export default function AddOrder() {
   const { isLoading, mutate } = useMutation(addOrder, {
     onError: (err) => {
       console.log("err", err);
+      setError(err.resposne.data);
     },
     onSuccess: () => {
       nav("/orders");
@@ -35,16 +38,35 @@ export default function AddOrder() {
 
   const submit = (e) => {
     e.preventDefault();
-    console.log("price", +price);
+    const changedPrice = Math.round(+price);
+    const changedQuantity = Math.round(+quantity);
+    console.log("price", changedPrice);
     console.log("additionalMessage", additionalMessage);
     console.log("itemId", itemId);
     console.log("name", name);
     console.log("description", description);
-    console.log("quantity", quantity);
+    console.log("quantity", changedQuantity);
+
+    const result = validate(
+      {
+        price: changedPrice,
+        additionalMessage,
+        itemId,
+        name,
+        description,
+        quantity: changedQuantity,
+      },
+      setError
+    );
+
+    if (!result) {
+      return;
+    }
+
     mutate({
-      price: +price,
+      price: changedPrice,
       additionalMessage,
-      itemsList: [{ itemId, name, description, quantity: +quantity }],
+      itemsList: [{ itemId, name, description, quantity: changedQuantity }],
     });
   };
 
@@ -95,7 +117,9 @@ export default function AddOrder() {
           type="number"
           callback={setQuantity}
           value={quantity}
+          error={error}
         />
+
         {isLoading ? (
           "Loading..."
         ) : (

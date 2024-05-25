@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useMutation, useQuery } from "react-query";
+import validate from "../../utils/validate";
 import Input from "../../components/Input/Input";
 import Icon from "../../components/svg-icon/Icon";
 import Cookies from "js-cookie";
@@ -24,6 +25,7 @@ export default function EditOrder() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState(1);
+  const [errorValidation, setErrorValidation] = useState("");
 
   const nav = useNavigate();
   const token = Cookies.get("token");
@@ -45,7 +47,7 @@ export default function EditOrder() {
         }
       },
       onError: (err) => {
-        console.log("err", err);
+        setErrorValidation(err.response.data);
       },
       refetchOnWindowFocus: false,
     }
@@ -62,12 +64,30 @@ export default function EditOrder() {
 
   const submit = (e) => {
     e.preventDefault();
+    const changedPrice = Math.round(+price);
+    const changedQuantity = Math.round(+quantity);
+    const result = validate(
+      {
+        changedPrice,
+        additionalMessage,
+        itemId,
+        name,
+        description,
+        changedQuantity,
+      },
+      setErrorValidation
+    );
+
+    if (!result) {
+      return;
+    }
+
     mutation.mutate({
       id,
       order: {
-        price: +price,
+        price: changedPrice,
         additionalMessage,
-        itemsList: [{ itemId, name, description, quantity: +quantity }],
+        itemsList: [{ itemId, name, description, quantity: changedQuantity }],
       },
     });
   };
@@ -119,7 +139,9 @@ export default function EditOrder() {
           type="number"
           value={quantity}
           callback={setQuantity}
+          error={errorValidation}
         />
+
         <div className="btn-container login-btn-container">
           <button className="welcome-btn login-btn" type="submit">
             Submit
