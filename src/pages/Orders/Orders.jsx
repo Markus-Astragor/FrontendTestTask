@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useQuery, useMutation } from "react-query";
+import { useQuery, useMutation, useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import api from "../../api/api";
@@ -7,7 +7,6 @@ import "./dist/Orders.css";
 
 const fetchOrders = async () => {
   const { data } = await api.get("/getOrders");
-  console.log("data", data);
   return data;
 };
 
@@ -18,6 +17,7 @@ const deleteOrder = async (id) => {
 
 export default function Orders() {
   const nav = useNavigate();
+  const queryClient = useQueryClient();
   const token = Cookies.get("token");
 
   const { data, error, isLoading } = useQuery("orders", fetchOrders, {
@@ -29,7 +29,7 @@ export default function Orders() {
       console.log("err", err);
     },
     onSuccess: () => {
-      nav("/orders");
+      queryClient.invalidateQueries("orders");
     },
   });
 
