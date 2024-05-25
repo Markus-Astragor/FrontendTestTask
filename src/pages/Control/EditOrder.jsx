@@ -23,7 +23,7 @@ export default function EditOrder() {
   const [itemId, setItemId] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
 
   const nav = useNavigate();
   const token = Cookies.get("token");
