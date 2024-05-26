@@ -13,7 +13,7 @@ const register = async (newUser) => {
 
 export default function Register() {
   const nav = useNavigate();
-  const [username, setUdername] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [error, setError] = useState("");
@@ -30,7 +30,7 @@ export default function Register() {
   });
 
   const submit = (e) => {
-    setUdername("");
+    setUsername("");
     setPassword("");
     setRepeatPassword("");
 
@@ -48,7 +48,7 @@ export default function Register() {
 
         <Input
           placeholder="Enter your name..."
-          callback={setUdername}
+          callback={setUsername}
           value={username}
         />
         <Input
@@ -84,6 +84,14 @@ export default function Register() {
         <span className="link-to" onClick={navToLogin}>
           Login
         </span>
+
+        <div className="google-btn-container">
+          <img
+            src={process.env.PUBLIC_URL + "/img/google.png"}
+            alt="google"
+            className="google-btn"
+          />
+        </div>
       </form>
     </div>
   );

@@ -37,13 +37,13 @@ export default function EditOrder() {
     () => fetchOrderById(id),
     {
       onSuccess: (data) => {
-        setPrice(data.price);
+        setPrice(Math.round(data.price));
         setAdditionalMessage(data.additionalMessage);
         if (data.itemsList.length > 0) {
           setItemId(data.itemsList[0].itemId);
           setName(data.itemsList[0].name);
           setDescription(data.itemsList[0].description);
-          setQuantity(data.itemsList[0].quantity);
+          setQuantity(Math.round(data.itemsList[0].quantity));
         }
       },
       onError: (err) => {
@@ -64,16 +64,18 @@ export default function EditOrder() {
 
   const submit = (e) => {
     e.preventDefault();
-    const changedPrice = Math.round(+price);
-    const changedQuantity = Math.round(+quantity);
+    // const changedPrice = Math.round(+price);
+    // const changedQuantity = Math.round(+quantity);
+    // console.log("changedPrice", changedPrice);
+    // console.log("changedQuantity", changedQuantity);
     const result = validate(
       {
-        changedPrice,
+        price: Math.round(price),
         additionalMessage,
         itemId,
         name,
         description,
-        changedQuantity,
+        quantity,
       },
       setErrorValidation
     );
@@ -85,9 +87,9 @@ export default function EditOrder() {
     mutation.mutate({
       id,
       order: {
-        price: changedPrice,
+        price,
         additionalMessage,
-        itemsList: [{ itemId, name, description, quantity: changedQuantity }],
+        itemsList: [{ itemId, name, description, quantity }],
       },
     });
   };

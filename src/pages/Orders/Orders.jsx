@@ -17,19 +17,32 @@ const deleteOrder = async (id) => {
   return data;
 };
 
-export default function Orders() {
-  const [errorValidation, setValidationError] = useState("");
+export default function Orders({ userDetails = "" }) {
   const nav = useNavigate();
+  const [errorValidation, setValidationError] = useState("");
   const queryClient = useQueryClient();
   const token = Cookies.get("token") ? jwtDecode(Cookies.get("token")) : "";
+
+  useEffect(() => {
+    if (!token) nav("/login");
+  }, [token, nav]);
 
   const { data, error, isLoading } = useQuery("orders", fetchOrders, {
     refetchOnWindowFocus: false,
   });
 
-  const signOut = () => {
-    nav("/");
+  const logOutGoogle = () => {
+    window.open(`http://localhost:8000/auth/logout`, "_self");
     Cookies.remove("token");
+  };
+
+  const signOut = () => {
+    if (userDetails) {
+      logOutGoogle();
+    } else {
+      nav("/");
+      Cookies.remove("token");
+    }
   };
 
   const mutation = useMutation(deleteOrder, {
@@ -40,10 +53,6 @@ export default function Orders() {
       queryClient.invalidateQueries("orders");
     },
   });
-
-  useEffect(() => {
-    if (!token) nav("/login");
-  }, [token, nav]);
 
   if (isLoading) {
     return <div className="orders-container">Loading...</div>;

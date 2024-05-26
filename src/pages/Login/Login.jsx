@@ -14,7 +14,7 @@ const login = async (user) => {
 
 export default function Login() {
   const nav = useNavigate();
-  const [username, setUdername] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
@@ -30,10 +30,14 @@ export default function Login() {
 
   const navToRegister = () => nav("/register");
 
+  const googleAuth = () => {
+    window.open(`http://localhost:8000/auth/google/callback`, "_self");
+  };
+
   const submit = (e) => {
     e.preventDefault();
 
-    setUdername("");
+    setUsername("");
     setPassword("");
     setError("");
 
@@ -48,7 +52,7 @@ export default function Login() {
 
         <Input
           placeholder="Enter your name..."
-          callback={setUdername}
+          callback={setUsername}
           value={username}
         />
         <Input
@@ -78,6 +82,13 @@ export default function Login() {
         <span className="link-to" onClick={navToRegister}>
           Register
         </span>
+        <div className="google-btn-container" onClick={googleAuth}>
+          <img
+            src={process.env.PUBLIC_URL + "/img/google.png"}
+            alt="google"
+            className="google-btn"
+          />
+        </div>
       </form>
     </div>
   );
