@@ -9,11 +9,13 @@ import Icon from "../../components/svg-icon/Icon";
 
 const fetchOrders = async () => {
   const { data } = await api.get("/getOrders");
+  console.log("data", data);
   return data;
 };
 
 const deleteOrder = async (id) => {
   const { data } = await api.delete(`/deleteOrder/${id}`);
+  console.log("data delete", data);
   return data;
 };
 
@@ -47,9 +49,11 @@ export default function Orders({ userDetails = "" }) {
 
   const mutation = useMutation(deleteOrder, {
     onError: (err) => {
+      console.log("Delete failed", err);
       setValidationError(err.response.data);
     },
     onSuccess: () => {
+      console.log("success");
       queryClient.invalidateQueries("orders");
     },
   });

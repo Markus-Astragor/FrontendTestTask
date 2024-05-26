@@ -1,14 +1,14 @@
 
 export default function validate(obj, setError) {
   console.log('obj', obj)
-  if (obj.price) {
+  if (obj.price || obj.price === 0) {
     if (obj.price > 1000000 || obj.price < 0 || obj.price === 0) {
       setError("Price should be less than 1000000 and more than 0");
       return false;
     }
   }
 
-  if (obj.quantity) {
+  if (obj.quantity || obj.quantity === 0) {
     if (obj.quantity > 500 || obj.quantity < 0 || obj.quantity === 0) {
       setError("Qunatity should be more than 0 and less than 500");
       return false;
